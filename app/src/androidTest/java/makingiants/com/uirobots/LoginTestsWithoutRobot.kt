@@ -9,6 +9,7 @@ import android.support.test.filters.LargeTest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import makingiants.com.uirobots.utils.CustomMatchers
+import org.hamcrest.core.AllOf
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -38,7 +39,7 @@ class LoginTestsWithoutRobot {
 
     Espresso.onView(ViewMatchers.withId(R.id.loginSubmitButton)).perform(ViewActions.click())
 
-    Espresso.onView(ViewMatchers.withText("Login"))
+    Espresso.onView(AllOf.allOf(ViewMatchers.withText("Main")))
         .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
   }
 
@@ -51,9 +52,6 @@ class LoginTestsWithoutRobot {
         .perform(ViewActions.typeText("12345678"), ViewActions.closeSoftKeyboard())
 
     Espresso.onView(ViewMatchers.withId(R.id.loginSubmitButton)).perform(ViewActions.click())
-
-    Espresso.onView(ViewMatchers.withText("Login"))
-        .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
 
     Espresso.onView(ViewMatchers.withId(R.id.loginUsernameEditText))
         .check(ViewAssertions.matches(CustomMatchers.withError()))
@@ -68,9 +66,6 @@ class LoginTestsWithoutRobot {
         .perform(ViewActions.typeText(""), ViewActions.closeSoftKeyboard())
 
     Espresso.onView(ViewMatchers.withId(R.id.loginSubmitButton)).perform(ViewActions.click())
-
-    Espresso.onView(ViewMatchers.withText("Login"))
-        .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
 
     Espresso.onView(ViewMatchers.withId(R.id.loginPasswordEditText))
         .check(ViewAssertions.matches(CustomMatchers.withError()))
