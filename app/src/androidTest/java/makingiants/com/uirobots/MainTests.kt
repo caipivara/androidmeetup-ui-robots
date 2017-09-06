@@ -28,9 +28,7 @@ class MainTests {
 
   @Test
   fun test_onLogout_showLoginView() {
-    val mainRobot = loginRobot.writeEmail("test@gmail.com")
-        .writePassword("123")
-        .clickLoginButton() // Returns MainRobot
+    val mainRobot = loginRobot.performLoginFlow()
 
     mainRobot.clickLogoutButton() // Returns LoginRobot
 
