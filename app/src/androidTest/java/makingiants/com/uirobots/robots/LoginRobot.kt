@@ -1,9 +1,12 @@
 package makingiants.com.uirobots.robots
 
 import android.app.Activity
+import android.support.test.espresso.Espresso
+import android.support.test.espresso.assertion.ViewAssertions
 import android.support.test.espresso.matcher.ViewMatchers
 import android.view.View
 import makingiants.com.uirobots.R
+import makingiants.com.uirobots.utils.CustomMatchers
 import org.hamcrest.Matchers
 
 class LoginRobot(activity: Activity) : BaseRobot(activity) {
@@ -32,8 +35,20 @@ class LoginRobot(activity: Activity) : BaseRobot(activity) {
     return MainRobot(activity)
   }
 
-  fun isVisible() {
+  fun checkIsVisible() {
     Matchers.allOf<View>(ViewMatchers.withText("Login"), ViewMatchers.isDisplayed())
   }
+
+  fun checkEmailHaveError() {
+    Espresso.onView(ViewMatchers.withId(R.id.loginUsernameEditText))
+        .check(ViewAssertions.matches(CustomMatchers.withError()))
+  }
+
+  fun checkPasswordHaveError() {
+    Espresso.onView(ViewMatchers.withId(R.id.loginPasswordEditText))
+        .check(ViewAssertions.matches(CustomMatchers.withError()))
+  }
+
+
 }
 

@@ -34,6 +34,6 @@ class MainTests {
 
     mainRobot.clickLogoutButton() // Returns LoginRobot
 
-    loginRobot.isVisible()
+    loginRobot.checkIsVisible()
   }
 }

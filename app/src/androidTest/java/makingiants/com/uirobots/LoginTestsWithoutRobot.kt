@@ -8,6 +8,7 @@ import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.filters.LargeTest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import makingiants.com.uirobots.utils.CustomMatchers
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -42,20 +43,37 @@ class LoginTestsWithoutRobot {
   }
 
   @Test
-  fun test_onLogout_showLoginView() {
+  fun test_login_withEmptyEmail_showsError() {
     Espresso.onView(ViewMatchers.withId(R.id.loginUsernameEditText))
-        .perform(ViewActions.typeText("test@gmail.com"), ViewActions.closeSoftKeyboard())
+        .perform(ViewActions.typeText(""), ViewActions.closeSoftKeyboard())
 
     Espresso.onView(ViewMatchers.withId(R.id.loginPasswordEditText))
         .perform(ViewActions.typeText("12345678"), ViewActions.closeSoftKeyboard())
 
-    Espresso.onView(ViewMatchers.withId(R.id.loginSubmitButton))
-        .perform(ViewActions.click())
-
-    Espresso.onView(ViewMatchers.withId(R.id.mainLogoutButton))
-        .perform(ViewActions.click())
+    Espresso.onView(ViewMatchers.withId(R.id.loginSubmitButton)).perform(ViewActions.click())
 
     Espresso.onView(ViewMatchers.withText("Login"))
         .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+    Espresso.onView(ViewMatchers.withId(R.id.loginUsernameEditText))
+        .check(ViewAssertions.matches(CustomMatchers.withError()))
   }
+
+  @Test
+  fun test_login_withEmptyPassword_showsError() {
+    Espresso.onView(ViewMatchers.withId(R.id.loginUsernameEditText))
+        .perform(ViewActions.typeText("test@gmail.com"), ViewActions.closeSoftKeyboard())
+
+    Espresso.onView(ViewMatchers.withId(R.id.loginPasswordEditText))
+        .perform(ViewActions.typeText(""), ViewActions.closeSoftKeyboard())
+
+    Espresso.onView(ViewMatchers.withId(R.id.loginSubmitButton)).perform(ViewActions.click())
+
+    Espresso.onView(ViewMatchers.withText("Login"))
+        .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+    Espresso.onView(ViewMatchers.withId(R.id.loginPasswordEditText))
+        .check(ViewAssertions.matches(CustomMatchers.withError()))
+  }
+
 }

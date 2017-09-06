@@ -10,7 +10,7 @@ class MainRobot(activity: Activity) : BaseRobot(activity) {
     return LoginRobot(activity)
   }
 
-  fun isVisible() {
+  fun checkIsVisible() {
     checkViewWithTextIsVisible("Main")
   }
 

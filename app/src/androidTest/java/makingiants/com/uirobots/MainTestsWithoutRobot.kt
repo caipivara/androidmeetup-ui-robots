@@ -28,20 +28,6 @@ class MainTestsWithoutRobot {
   }
 
   @Test
-  fun test_login_showMainView() {
-    onView(withId(R.id.loginUsernameEditText))
-        .perform(typeText("test@gmail.com"), closeSoftKeyboard())
-
-    onView(withId(R.id.loginPasswordEditText))
-        .perform(typeText("12345678"), closeSoftKeyboard())
-
-    onView(withId(R.id.loginSubmitButton)).perform(click())
-
-    onView(withText("Login"))
-        .check(ViewAssertions.matches(isDisplayed()))
-  }
-
-  @Test
   fun test_onLogout_showLoginView() {
     onView(withId(R.id.loginUsernameEditText))
         .perform(typeText("test@gmail.com"), closeSoftKeyboard())

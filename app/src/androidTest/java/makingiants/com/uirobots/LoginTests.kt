@@ -11,7 +11,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 
-
 @LargeTest
 @RunWith(AndroidJUnit4::class)
 class LoginTests {
@@ -30,11 +29,29 @@ class LoginTests {
 
   @Test
   fun test_login_showMainView() {
-    val mainRobot = loginRobot.writeEmail("test@gmail.com")
-        .writePassword("123")
+    val mainRobot = loginRobot.writeEmail("james@bond.com")
+        .writePassword("007")
         .clickLoginButton() // Returns MainRobot
 
-    mainRobot.isVisible()
+    mainRobot.checkIsVisible()
+  }
+
+  @Test
+  fun test_login_withEmptyEmail_showsError() {
+    loginRobot.writeEmail("")
+        .writePassword("123")
+        .clickLoginButton()
+
+    loginRobot.checkEmailHaveError()
+  }
+
+  @Test
+  fun test_login_withEmptyPassword_showsError() {
+    loginRobot.writeEmail("james@bond.com")
+        .writePassword("")
+        .clickLoginButton()
+
+    loginRobot.checkPasswordHaveError()
   }
 
 }
