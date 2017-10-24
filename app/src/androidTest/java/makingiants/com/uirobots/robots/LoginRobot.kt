@@ -11,7 +11,7 @@ import org.hamcrest.Matchers
 
 class LoginRobot(activity: Activity) : BaseRobot(activity) {
 
-  fun performLoginFlow(): MainRobot {
+  fun doLoginSuccessfully(): MainRobot {
     writeEmail("daniel+p@barista-v.com")
     writePassword("12345678")
 
@@ -48,7 +48,6 @@ class LoginRobot(activity: Activity) : BaseRobot(activity) {
     Espresso.onView(ViewMatchers.withId(R.id.loginPasswordEditText))
         .check(ViewAssertions.matches(CustomMatchers.withError()))
   }
-
 
 }
 

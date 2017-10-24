@@ -17,7 +17,7 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class LoginTestsWithoutRobot {
+class LoginTestsPlain {
 
   @get:Rule
   var rule = ActivityTestRule(MainActivity::class.java, false, false)
@@ -25,7 +25,6 @@ class LoginTestsWithoutRobot {
   @Before
   fun setUp() {
     UserRepository.clear(InstrumentationRegistry.getTargetContext())
-
     rule.launchActivity(null)
   }
 
